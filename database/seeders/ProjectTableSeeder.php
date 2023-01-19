@@ -18,11 +18,15 @@ class ProjectTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         for ($i = 0; $i < 10; $i++) {
-            $Project = new Project();
-            $Project->title = $faker->sentence(3);
-            $Project->slug = Str::slug($Project->title, '-');
-            $Project->content = $faker->text(500);
-            $Project->save();
+            $project = new Project();
+            $project->name = $faker->words(1, true);
+            $project->slug = Str::slug($project->name, '-');
+            $project->description = $faker->paragraph();
+            $project->framework = $faker->words(3, true);
+            $project->team = $faker->firstName();
+            $project->git_link = $faker->url();
+            $project->diff_lvl = $faker->numberBetween(1, 10);
+            $project->save();
         }
     }
 }
